@@ -3,74 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy New Year My Love 🎆</title>
+
 <style>
 body{
   margin:0;
   height:100vh;
   background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+  background-size:400% 400%;
+  animation:bg 10s ease infinite;
   font-family:sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
   color:white;
 }
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 .card{
   background:rgba(0,0,0,0.55);
   border-radius:25px;
   padding:25px;
-  max-width:350px;
+  width:320px;
   text-align:center;
+  box-shadow:0 0 25px rgba(255,255,255,0.3);
 }
-h1{color:#ffe066;}
+
+h1{color:#ffe066}
+
 img{
   width:200px;
   border-radius:20px;
   margin:15px 0;
+  box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
+
+#countdown{margin-top:10px;color:#ffd1dc}
+
 .heart{
   position:fixed;
-  bottom:-20px;
   animation:float 6s linear infinite;
 }
 @keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-110vh);}
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-10vh)}
 }
+
 .firework{
   position:fixed;
-  width:6px;
-  height:6px;
+  width:8px;
+  height:8px;
   border-radius:50%;
   background:transparent;
   box-shadow:
     0 0 #fff,
-    15px 0 #ff4f8b,
-    -15px 0 #ffe066,
-    0 15px #7bed9f,
-    0 -15px #70a1ff;
-  animation:boom 1.2s ease-out infinite;
+    20px 0 #ff4f8b,
+    -20px 0 #ffe066,
+    0 20px #7bed9f,
+    0 -20px #70a1ff,
+    14px 14px #ff6b81,
+    -14px -14px #ffa502;
+  animation:boom 1.5s ease-out infinite;
 }
 @keyframes boom{
-  from{transform:scale(0);}
-  to{transform:scale(2.5);opacity:0;}
+  from{transform:scale(0)}
+  to{transform:scale(3);opacity:0}
 }
 </style>
 </head>
+
 <body>
 
 <div class="card">
   <h1>🎆 Happy New Year 2026 🎆</h1>
+
   <p>ถึงที่รักของเค้า 💖</p>
   <p>
-    ตั้งแต่วันที่ <b>04/10/68</b>  
-    ขอบคุณที่เข้ามาเป็นรอยยิ้มของเค้า  
-    ขอให้ทุกปีใหม่ของเรามีแค่คำว่า  
-    <b>เราสองคน</b> ตลอดไปนะคะ 🤍
+    ตั้งแต่วันที่ <b>04/10/68</b><br>
+    ขอบคุณที่เข้ามาเป็นรอยยิ้มของเค้า<br>
+    ขอให้ทุกปีใหม่มีแค่คำว่า<br>
+    <b>เราสองคน</b> 🤍
   </p>
 
-  <img src="IMG_2943.jpeg">
+  <img src="love.jpg">
 
-  <h3 id="countdown"></h3>
+  <div id="countdown"></div>
 
   <audio controls autoplay>
     <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
@@ -78,35 +98,35 @@ img{
 </div>
 
 <script>
-const newYear = new Date("Jan 1, 2026 00:00:00").getTime();
+// นับถอยหลัง
+const ny=new Date("Jan 1, 2026 00:00:00").getTime();
 setInterval(()=>{
-  const now=new Date().getTime();
-  const d=newYear-now;
+  const d=ny-new Date().getTime();
   const h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
   const m=Math.floor((d%(1000*60*60))/(1000*60));
   const s=Math.floor((d%(1000*60))/1000);
-  document.getElementById("countdown").innerHTML =
-    "⏳ อีก "+h+" ชม. "+m+" นาที "+s+" วิ เข้าสู่ปีใหม่ของเรา";
+  document.getElementById("countdown").innerHTML=
+  "⏳ อีก "+h+" ชม. "+m+" นาที "+s+" วิ";
 },1000);
 
 // หัวใจลอย
-setInterval(()=>{
+for(let i=0;i<15;i++){
   let h=document.createElement("div");
   h.className="heart";
   h.innerHTML="💗";
   h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=3+Math.random()*5+"s";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},500);
+}
 
-// พลุแตก
+// พลุ
 setInterval(()=>{
   let f=document.createElement("div");
   f.className="firework";
   f.style.left=Math.random()*100+"vw";
   f.style.top=Math.random()*60+"vh";
   document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1200);
+  setTimeout(()=>f.remove(),1500);
 },900);
 </script>
 
