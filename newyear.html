@@ -7,52 +7,52 @@
 body{
   margin:0;
   height:100vh;
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb,#a18cd1);
-  animation:bgmove 10s infinite alternate;
-  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+  font-family:sans-serif;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   color:white;
-}
-@keyframes bgmove{
-  0%{background-position:0% 50%;}
-  100%{background-position:100% 50%;}
 }
 .card{
   background:rgba(0,0,0,0.55);
   border-radius:25px;
-  padding:30px 20px;
+  padding:25px;
   max-width:350px;
   text-align:center;
-  box-shadow:0 0 30px rgba(255,255,255,0.3);
 }
-h1{
-  color:#ffe066;
-  animation:pop 1s infinite alternate;
-}
-@keyframes pop{
-  from{transform:scale(1);}
-  to{transform:scale(1.05);}
-}
+h1{color:#ffe066;}
 img{
   width:200px;
   border-radius:20px;
   margin:15px 0;
-  box-shadow:0 0 20px rgba(255,255,255,0.6);
-}
-#countdown{
-  margin-top:10px;
-  color:#ffdde1;
 }
 .heart{
   position:fixed;
-  color:pink;
+  bottom:-20px;
   animation:float 6s linear infinite;
 }
 @keyframes float{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-10vh);}
+  from{transform:translateY(0);}
+  to{transform:translateY(-110vh);}
+}
+.firework{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:
+    0 0 #fff,
+    15px 0 #ff4f8b,
+    -15px 0 #ffe066,
+    0 15px #7bed9f,
+    0 -15px #70a1ff;
+  animation:boom 1.2s ease-out infinite;
+}
+@keyframes boom{
+  from{transform:scale(0);}
+  to{transform:scale(2.5);opacity:0;}
 }
 </style>
 </head>
@@ -60,53 +60,54 @@ img{
 
 <div class="card">
   <h1>🎆 Happy New Year 2026 🎆</h1>
-
   <p>ถึงที่รักของเค้า 💖</p>
   <p>
-    ตั้งแต่วันที่ <b>04/10/68</b> จนถึงวันนี้  
+    ตั้งแต่วันที่ <b>04/10/68</b>  
     ขอบคุณที่เข้ามาเป็นรอยยิ้มของเค้า  
     ขอให้ทุกปีใหม่ของเรามีแค่คำว่า  
-    <b>“เราสองคน”</b> ตลอดไปนะคะ 🤍
+    <b>เราสองคน</b> ตลอดไปนะคะ 🤍
   </p>
 
- IMG_2943.jpeg
+  <img src="love.jpg">
+
   <h3 id="countdown"></h3>
 
   <audio controls autoplay>
     <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
   </audio>
 </div>
-  
 
-}}<script>// พลุแตก
+<script>
+const newYear = new Date("Jan 1, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const d=newYear-now;
+  const h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((d%(1000*60*60))/(1000*60));
+  const s=Math.floor((d%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML =
+    "⏳ อีก "+h+" ชม. "+m+" นาที "+s+" วิ เข้าสู่ปีใหม่ของเรา";
+},1000);
+
+// หัวใจลอย
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+
+// พลุแตก
 setInterval(()=>{
   let f=document.createElement("div");
   f.className="firework";
   f.style.left=Math.random()*100+"vw";
   f.style.top=Math.random()*60+"vh";
   document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1500);
-},800);
-const newYear = new Date("Jan 1, 2026 00:00:00").getTime();
-setInterval(()=>{
-  const now = new Date().getTime();
-  const d = newYear-now;
-  const h = Math.floor((d%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((d%(1000*60*60))/(1000*60));
-  const s = Math.floor((d%(1000*60))/1000);
-  document.getElementById("countdown").innerHTML =
-  "⏳ อีก "+h+" ชม. "+m+" นาที "+s+" วิ เข้าสู่ปีใหม่ของเรา";
-},1000);
-
-// หัวใจลอย
-for(let i=0;i<20;i++){
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💗";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=3+Math.random()*5+"s";
-  document.body.appendChild(h);
-}
+  setTimeout(()=>f.remove(),1200);
+},900);
 </script>
 
 </body>
