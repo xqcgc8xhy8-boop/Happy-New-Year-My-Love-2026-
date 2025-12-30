@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year My Love 🎆</title>
+<style>
+body{
+  background: radial-gradient(circle,#1a2a6c,#b21f1f,#fdbb2d);
+  color:white;
+  text-align:center;
+  font-family:sans-serif;
+  padding:20px;
+}
+h1{color:#ffe066;}
+.card{
+  background:rgba(0,0,0,0.5);
+  border-radius:20px;
+  padding:20px;
+  max-width:350px;
+  margin:auto;
+}
+</style>
+</head>
+<body>
+
+<h1>🎆 Happy New Year 2026 🎆</h1>
+
+<div class="card">
+  <p>ถึงที่รักของเค้า 💖</p>
+  <p>
+  ขอบคุณที่เข้ามาเป็นเรื่องดี ๆ ตั้งแต่ 04/10/68  
+  ขอให้ทุกปีใหม่ของเรามีแค่คำว่า “เราสองคน” นะคะ  
+  รักที่สุดเลย 🤍
+  </p>
+
+  <h3 id="countdown"></h3>
+
+  <audio controls autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+  </audio>
+</div>
+
+<script>
+const newYear = new Date("Jan 1, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now = new Date().getTime();
+  const d = newYear-now;
+  const h = Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((d%(1000*60*60))/(1000*60));
+  const s = Math.floor((d%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML =
+  "⏳ อีก "+h+" ชม. "+m+" นาที "+s+" วิ เข้าสู่ปีใหม่ของเรา";
+},1000);
+</script>
+
+</body>
+</html>
